@@ -124,10 +124,6 @@ exports.verifyPhoneNumber = function(number, timeOutDuration, success, error) {
     exec(success, error, "FirebasePlugin", "verifyPhoneNumber", [number, timeOutDuration]);
 };
 
-exports.signInWithPhoneAuthCredential = function(id, code, success, error) {
-    exec(success, error, "FirebasePlugin", "signInWithPhoneAuthCredential", [id, code]);
-};
-
 exports.setAlwaysShowNotification = function(alwaysShow, success, error) {
     exec(success, error, "FirebasePlugin", "setAlwaysShowNotification", [alwaysShow]);
 };

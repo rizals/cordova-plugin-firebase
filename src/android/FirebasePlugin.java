@@ -701,7 +701,7 @@ public class FirebasePlugin extends CordovaPlugin {
         });
     }
 
-private void signInWithPhoneAuthCredential(final CallbackContext callbackContext, final String id, final String code) {
+private void signInWithPhoneAuthCredential(final CallbackContext callbackContext, final String id, final int code) {
             cordova.getThreadPool().execute(new Runnable() {
             public void run() {
                 try {

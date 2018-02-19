@@ -151,7 +151,7 @@ public class FirebasePlugin extends CordovaPlugin {
             this.verifyPhoneNumber(callbackContext, args.getString(0), args.getInt(1));
             return true;
          } else if (action.equals("signInWithPhoneAuthCredential")) {
-            this.verifyPhoneNumber(callbackContext, args.getString(0), args.getInt(1));
+            this.signInWithPhoneAuthCredential(callbackContext, args.getString(0), args.getInt(1));
             return true;
         } else if (action.equals("setAlwaysShowNotification")) {
             this.setAlwaysShowNotification(args.getBoolean(0));
@@ -701,6 +701,34 @@ public class FirebasePlugin extends CordovaPlugin {
         });
     }
 
+private void signInWithPhoneAuthCredential(final CallbackContext callbackContext, final String id, final String code) {
+            cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                try {
+                        mAuth.signInWithCredential(PhoneAuthProvider.getCredential(id, code))
+                                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
+                                            // Sign in success, update UI with the signed-in user's information
+                                            Log.d(TAG, "signInWithCredential:success");
+
+                                            FirebaseUser user = task.getResult().getUser();
+                                            // ...
+                                        } else {
+                                            // Sign in failed, display a message and update the UI
+                                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                                // The verification code entered was invalid
+                                            }
+                                        }
+                                    }
+                                });
+               } catch (Exception e) {
+                    callbackContext.error(e.getMessage());
+                }
+          });
+}
     private void setAlwaysShowNotification(final boolean alwaysShow) {
         FirebasePlugin.alwaysShowNotification = alwaysShow;
     }

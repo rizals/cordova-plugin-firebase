@@ -727,6 +727,7 @@ private void signInWithPhoneAuthCredential(final CallbackContext callbackContext
                } catch (Exception e) {
                     callbackContext.error(e.getMessage());
                 }
+            }
           });
 }
     private void setAlwaysShowNotification(final boolean alwaysShow) {

@@ -150,9 +150,6 @@ public class FirebasePlugin extends CordovaPlugin {
         } else if (action.equals("verifyPhoneNumber")) {
             this.verifyPhoneNumber(callbackContext, args.getString(0), args.getInt(1));
             return true;
-         } else if (action.equals("signInWithPhoneAuthCredential")) {
-            this.signInWithPhoneAuthCredential(callbackContext, args.getString(0), args.getInt(1));
-            return true;
         } else if (action.equals("setAlwaysShowNotification")) {
             this.setAlwaysShowNotification(args.getBoolean(0));
             return true;
